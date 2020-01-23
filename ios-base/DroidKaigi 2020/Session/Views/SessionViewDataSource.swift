@@ -1,13 +1,12 @@
 import ios_combined
-import UIKit
-import RxSwift
-import RxCocoa
 import MaterialComponents
+import RxCocoa
+import RxSwift
+import UIKit
 
 final class SessionViewDataSource: NSObject, UICollectionViewDataSource {
-
-    typealias Elememt = [Session]
-    var items: Elememt = []
+    typealias Element = [Session]
+    var items: Element = []
 
     private var previousTimeString = ""
 
@@ -38,7 +37,7 @@ final class SessionViewDataSource: NSObject, UICollectionViewDataSource {
             cell.timeLabel.text = ""
         }
         previousTimeString = session.startTimeText
-        
+
         cell.minutesAndRoomLabel.text = "\(session.timeInMinutes)min / \(session.room.name.ja)"
 
         return cell
@@ -46,7 +45,7 @@ final class SessionViewDataSource: NSObject, UICollectionViewDataSource {
 }
 
 extension SessionViewDataSource: RxCollectionViewDataSourceType, SectionedViewDataSourceType {
-    func collectionView(_ collectionView: UICollectionView, observedEvent: Event<SessionViewDataSource.Elememt>) {
+    func collectionView(_ collectionView: UICollectionView, observedEvent: Event<SessionViewDataSource.Element>) {
         Binder(self) { dataSource, items in
             dataSource.items = items
             collectionView.reloadData()
